@@ -182,9 +182,14 @@ create_launcher() {
   cat >"$launcher" <<EOF
 #!/usr/bin/env bash
 set -Eeuo pipefail
+
+# Kill any existing Jupyter on the same port
+lsof -ti:${JUPYTER_PORT} 2>/dev/null | xargs kill -9 2>/dev/null || true
+sleep 1
+
 source "${VENV_DIR}/bin/activate"
 cd "${WORKDIR}"
-jupyter lab --ip="${JUPYTER_IP}" --port="${JUPYTER_PORT}" --no-browser
+jupyter lab --ip="${JUPYTER_IP}" --port="${JUPYTER_PORT}" --port-retries=0 --no-browser
 EOF
 
   chmod +x "$launcher"

@@ -189,20 +189,27 @@ cd ~/notebooks
 jupyter lab --ip=0.0.0.0 --port=8888 --no-browser
 ```
 
-### Access from your local machine
+### Connect from your local machine (auto port-forward)
 
-#### SSH Tunnel (recommended for security)
+Use `connect.sh` on your **local machine** — it opens an SSH tunnel and launches the browser:
+
+```bash
+# Basic usage
+bash connect.sh user@server_ip
+
+# Custom port
+bash connect.sh user@server_ip 8888
+
+# With SSH key
+bash connect.sh user@server_ip 8888 ~/.ssh/id_rsa
+```
+
+Or manually:
 ```bash
 ssh -L 8888:localhost:8888 user@server_ip
 ```
 
-Then open in browser: `http://localhost:8888`
-
-#### Direct Access
-If your VDS has a public IP and firewall allows port 8888:
-```
-http://server_ip:8888
-```
+Then open: `http://localhost:8888`
 
 ### Authentication
 
