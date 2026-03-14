@@ -34,23 +34,16 @@ ENV_CHOICE="${2:-}"
 if [[ -z "$IP" ]]; then
   # Try saved IP
   if [[ -f "$STATE_FILE" ]]; then
-    IP=$(cat "$STATE_FILE")
-    log "Using saved IP: $IP"
+    SAVED_IP=$(cat "$STATE_FILE")
+    read -p "Server IP [${SAVED_IP}]: " IP
+    IP="${IP:-$SAVED_IP}"
   else
-    cat <<'USAGE'
-Usage: bash deploy.sh <server_ip> <environment>
-
-Environments:
-  1 | robotics  — ROS2, gymnasium, mujoco, torch, visualization
-  2 | nlp       — transformers, spacy, nltk, torch, pandas
-  3 | ml        — scikit-learn, xgboost, lightgbm, torch, pandas
-
-Examples:
-  bash deploy.sh 158.160.42.69 1
-  bash deploy.sh 158.160.42.69 nlp
-USAGE
-    exit 1
+    read -p "Server IP: " IP
   fi
+fi
+
+if [[ -z "$IP" ]]; then
+  err "Server IP is required"
 fi
 
 if [[ -z "$ENV_CHOICE" ]]; then
