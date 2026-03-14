@@ -2,27 +2,27 @@
 
 One-command Jupyter + environment setup scripts for minimal Linux VDS.
 
-**Supported environments:**
-- **Robotics**: ROS2, gymnasium, mujoco, torch, OpenGL visualization
-- **NLP**: Transformers, spacy, nltk, pandas, torch
-- **ML**: scikit-learn, xgboost, lightgbm, torch, pandas
+**Robotics** (ROS2, gymnasium, mujoco, torch, OpenGL visualization):
+```bash
+curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s robotics
+```
+
+**NLP** (transformers, spacy, nltk, pandas, torch):
+```bash
+curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s nlp
+```
+
+**ML** (scikit-learn, xgboost, lightgbm, torch, pandas):
+```bash
+curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s ml
+```
 
 ## Quick Start
 
-### Option 1: One-liner from GitHub
+### Interactive menu
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash
-```
-
-This will present a menu to choose your environment.
-
-### Option 2: Direct environment selection
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s robotics
-curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s nlp
-curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s ml
 ```
 
 ### Option 3: Local setup
