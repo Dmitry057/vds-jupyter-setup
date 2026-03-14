@@ -1,36 +1,60 @@
 # VDS Jupyter Setup
 
-One-command Jupyter + environment setup scripts for minimal Linux VDS.
+One command — install environment on a bare server, forward ports, get a Jupyter URL.
 
-**Robotics** (ROS2, gymnasium, mujoco, torch, OpenGL visualization):
+## One-liner (run on your Mac)
+
 ```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/deploy.sh) <SERVER_IP> <ENV>
+```
+
+**Environments:**
+
+| # | Name | Packages |
+|---|------|----------|
+| 1 | `robotics` | ROS2, gymnasium, mujoco, torch, OpenCV, visualization |
+| 2 | `nlp` | transformers, spacy, nltk, torch, pandas |
+| 3 | `ml` | scikit-learn, xgboost, lightgbm, torch, pandas |
+
+**Examples:**
+```bash
+# Robotics
+bash <(curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/deploy.sh) 158.160.42.69 1
+
+# NLP
+bash <(curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/deploy.sh) 158.160.42.69 nlp
+
+# ML
+bash <(curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/deploy.sh) 158.160.42.69 ml
+
+# Re-use saved IP (interactive env menu)
+bash <(curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/deploy.sh)
+```
+
+The script will:
+1. SSH to the server (using `~/.ssh/Ключевая_пара_finetuning.pem`)
+2. Install the chosen environment (skips if already installed)
+3. Start Jupyter Lab
+4. Open SSH tunnel for port forwarding
+5. Print the `http://127.0.0.1:8888/lab?token=...` URL
+6. Open the URL in your browser
+
+## Server-only setup (run on the server itself)
+
+If you just want to set up the environment without port forwarding:
+
+```bash
+# Robotics
 curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s robotics
-```
 
-**NLP** (transformers, spacy, nltk, pandas, torch):
-```bash
+# NLP
 curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s nlp
-```
 
-**ML** (scikit-learn, xgboost, lightgbm, torch, pandas):
-```bash
+# ML
 curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash -s ml
-```
 
-## Quick Start
-
-### Interactive menu
-
-```bash
+# Interactive menu
 curl -fsSL https://raw.githubusercontent.com/Dmitry057/vds-jupyter-setup/main/setup.sh | bash
-```
-
-### Option 3: Local setup
-
-```bash
-git clone https://github.com/Dmitry057/vds-jupyter-setup.git
-cd vds-jupyter-setup
-bash setup.sh
 ```
 
 ## Detailed Setup
